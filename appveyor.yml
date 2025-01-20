@@ -1,0 +1,19 @@
+version: 1.0.{build}
+
+image: Visual Studio 2019
+
+platform:
+  - x64
+
+build_script:
+  - git clone https://github.com/TsioryRasoloarijaona/amortissement_windows_version.git
+  - cd project
+  - mkdir build
+  - cd build
+  - cmake -G "MinGW Makefiles" ..
+  - mingw32-make
+  - mv amortissement.exe .. 
+
+artifacts:
+  - path: amortissement.exe
+    name: executable
