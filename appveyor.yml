@@ -7,7 +7,7 @@ platform:
 
 build_script:
   - git clone https://github.com/TsioryRasoloarijaona/amortissement_windows_version.git
-  - cd project
+  - cd C:\projects\amortissement-windows-version
   - mkdir build
   - cd build
   - cmake -G "MinGW Makefiles" ..
