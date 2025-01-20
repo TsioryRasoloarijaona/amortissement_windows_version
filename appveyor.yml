@@ -5,15 +5,26 @@ image: Visual Studio 2019
 platform:
   - x64
 
-build_script:
-  - git clone https://github.com/TsioryRasoloarijaona/amortissement_windows_version.git
+before_build:
+ 
+  - git clone https://github.com/TsioryRasoloarijaona/amortissement_windows_version.git C:\projects\amortissement-windows-version
   - cd C:\projects\amortissement-windows-version
-  - mkdir build
-  - cd build
-  - cmake -G "MinGW Makefiles" ..
+
+ 
+  - del /f /q C:\projects\amortissement-windows-version\CMakeCache.txt
+  - rmdir /s /q C:\projects\amortissement-windows-version\build
+
+
+  - mkdir C:\projects\amortissement-windows-version\build
+  - cd C:\projects\amortissement-windows-version\build
+
+
+  - cmake -DCMAKE_TOOLCHAIN_FILE=toolchain-mingw.cmake -DCMAKE_PREFIX_PATH="C:\Qt\6.8.1\mingw_64\lib\cmake\Qt6" -G "MinGW Makefiles" ..
+
+build_script:
+  - cd C:\projects\amortissement-windows-version\build
   - mingw32-make
-  - mv amortissement.exe .. 
 
 artifacts:
-  - path: amortissement.exe
+  - path:  C:\projects\amortissement-windows-version\build\amortissement_app.exe
     name: executable
