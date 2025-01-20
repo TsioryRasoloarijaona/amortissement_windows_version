@@ -11,20 +11,20 @@ before_build:
   - cd C:\projects\amortissement-windows-version
 
  
-  - del /f /q C:\projects\amortissement-windows-version\CMakeCache.txt
-  - rmdir /s /q C:\projects\amortissement-windows-version\build
+  - del /f /q C:\projects_1\amortissement-windows-version\CMakeCache.txt
+  - rmdir /s /q C:\projects_2\amortissement-windows-version\build
 
 
-  - mkdir C:\projects\amortissement-windows-version\build
-  - cd C:\projects\amortissement-windows-version\build
+  - mkdir C:\projects_1\amortissement-windows-version\build
+  - cd C:\projects_1\amortissement-windows-version\build
 
 
   - cmake -DCMAKE_TOOLCHAIN_FILE=toolchain-mingw.cmake -DCMAKE_PREFIX_PATH="C:\Qt\6.8.1\mingw_64\lib\cmake\Qt6" -G "MinGW Makefiles" ..
 
 build_script:
-  - cd C:\projects\amortissement-windows-version\build
+  - cd C:\projects_1\amortissement-windows-version\build
   - mingw32-make
 
 artifacts:
-  - path:  C:\projects\amortissement-windows-version\build\amortissement_app.exe
+  - path:  C:\projects_1\amortissement-windows-version\build\amortissement_app.exe
     name: executable
