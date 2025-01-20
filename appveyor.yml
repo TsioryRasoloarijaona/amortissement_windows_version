@@ -6,25 +6,29 @@ platform:
   - x64
 
 before_build:
- 
-  - git clone https://github.com/TsioryRasoloarijaona/amortissement_windows_version.git C:\projects_3\amortissement-windows-version
-  - cd C:\projects_3\amortissement-windows-version
+  # Cloner le projet dans un répertoire spécifique
+  - git clone https://github.com/TsioryRasoloarijaona/amortissement_windows_version.git C:\projects_4\amortissement-windows-version
+  - cd C:\projects_4\amortissement-windows-version
 
- 
-  - del /f /q C:\projects_3\amortissement-windows-version\CMakeCache.txt
-  - rmdir /s /q C:\projects_3\amortissement-windows-version\build
+  # Supprimer les anciens fichiers de cache
+  - del /f /q C:\projects_4\amortissement-windows-version\CMakeCache.txt
+  
+  # Vérifier si le répertoire build existe avant de le supprimer
+  - if exist C:\projects_4\amortissement-windows-version\build rmdir /s /q C:\projects_4\amortissement-windows-version\build
 
+  # Créer un nouveau répertoire de build
+  - mkdir C:\projects_4\amortissement-windows-version\build
+  - cd C:\projects_4\amortissement-windows-version\build
 
-  - mkdir C:\projects_3\amortissement-windows-version\build
-  - cd C:\projects_3\amortissement-windows-version\build
-
-
+  # Exécuter CMake pour générer les fichiers de build
   - cmake -DCMAKE_TOOLCHAIN_FILE=toolchain-mingw.cmake -DCMAKE_PREFIX_PATH="C:\Qt\6.8.1\mingw_64\lib\cmake\Qt6" -G "MinGW Makefiles" ..
 
 build_script:
-  - cd C:\projects_3\amortissement-windows-version\build
+  # Naviguer dans le répertoire de build et compiler avec mingw32-make
+  - cd C:\projects_4\amortissement-windows-version\build
   - mingw32-make
 
 artifacts:
-  - path:  C:\projects_3\amortissement-windows-version\build\amortissement_app.exe
-    name: executable
+  # Spécifier le chemin correct de l'exécutable généré pour l'artefact
+  - path: C:\projects_4\amortissement-windows-version\build\amortissement_app.exe
+    name: amortissement_app
